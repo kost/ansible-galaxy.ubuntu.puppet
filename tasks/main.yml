@@ -5,9 +5,8 @@
     - "{{ puppet_release_rpm_baseurl }}/puppetlabs-release-{% if ansible_distribution == 'Fedora' %}fedora{% else %}el{% endif %}-{{ ansible_distribution_version.split('.')[0] }}"
   when: ansible_os_family == 'RedHat'
   tags:
-    - repo
     - install
-    - packages
+    - repo
 
 - name: Install PuppetLabs release DEB for Debian derivates
   apt: pkg=puppet state={{ item }} update_cache=yes
@@ -15,9 +14,8 @@
     - "{{ puppet_release_rpm_baseurl }}/puppetlabs-release-{{ ansible_distribution_release }}.deb"
   when: ansible_os_family == 'Debian'
   tags:
-    - repo
     - install
-    - packages
+    - repo
 
 - name: Install puppet via yum
   yum: name={{ item }} state={{ puppet_package_state }}
